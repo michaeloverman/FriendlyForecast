@@ -15,6 +15,8 @@ import com.teamtreehouse.friendlyforecast.db.ForecastDatasource;
 import com.teamtreehouse.friendlyforecast.services.Forecast;
 import com.teamtreehouse.friendlyforecast.services.ForecastService;
 
+import java.sql.SQLException;
+
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -97,7 +99,11 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         // TODO: Open db
-        mDatasource.open();
+        try {
+            mDatasource.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
