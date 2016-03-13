@@ -3,6 +3,7 @@ package com.teamtreehouse.friendlyforecast.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by overm on 3/8/2016.
@@ -25,6 +26,7 @@ public class ForecastHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d("ForecastHelper", "in onCreate()");
         db.execSQL(DB_CREATE);
     }
 

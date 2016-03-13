@@ -1,19 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" >
+<items version="2" />
 
-    <item
-        jar="C:\Users\overm\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit\retrofit\1.5.0\54271c5c7a4dfa1c7cd53d0b10956ea35d32abb0\retrofit-1.5.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="54271c5c7a4dfa1c7cd53d0b10956ea35d32abb0">
-        <dex dex="C:\Users\overm\AndroidStudioProjects\FriendlyForecast\app\build\intermediates\pre-dexed\debug\retrofit-1.5.0_f5a5e00daaa84120dd768b092f917558c0af2c9a.jar" />
-    </item>
-    <item
-        jar="C:\Users\overm\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="a60a5e993c98c864010053cb901b7eab25306568">
-        <dex dex="C:\Users\overm\AndroidStudioProjects\FriendlyForecast\app\build\intermediates\pre-dexed\debug\gson-2.2.4_15079b2c794fa8d87de3741263eb825612e48646.jar" />
-    </item>
-
-</items>

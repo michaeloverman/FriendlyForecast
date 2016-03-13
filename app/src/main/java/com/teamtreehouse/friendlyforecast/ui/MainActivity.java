@@ -100,8 +100,10 @@ public class MainActivity extends Activity {
         super.onResume();
         // TODO: Open db
         try {
+            Log.d(TAG, "opening database");
             mDatasource.open();
         } catch (SQLException e) {
+            Log.d(TAG, "SqlException caught on open");
             e.printStackTrace();
         }
     }
@@ -119,17 +121,19 @@ public class MainActivity extends Activity {
     }
 
     protected Callback<Forecast> mForecastCallback = new Callback<Forecast>() {
+        //Log.d(TAG, "in the Callback");
         @Override
         public void success(Forecast forecast, Response response) {
+            Log.d(TAG, "in the callback success method, Ellie wants what for Bday?");
             mTemperatures = new double[forecast.hourly.data.size()];
             for (int i = 0; i < forecast.hourly.data.size(); i++) {
                 mTemperatures[i] = forecast.hourly.data.get(i).temperature;
                 Log.v(TAG, "Temp " + i + ": " + mTemperatures[i]);
             }
 
-            // TODO: Insert
-            //updateHighAndLow();
-            //enableOtherButtons();
+            mDatasource.insertForecast(forecast);
+            updateHighAndLow();
+            enableOtherButtons();
         }
 
         @Override
