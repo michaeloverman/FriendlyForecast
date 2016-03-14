@@ -2,6 +2,7 @@ package com.teamtreehouse.friendlyforecast.db;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -37,19 +38,72 @@ public class ForecastDatasource {
 
     // insert
     public void insertForecast(Forecast forecast) {
-        Log.d(TAG, "In insertForecast()");
-        ContentValues values = new ContentValues();
-        values.put(ForecastHelper.COLUMN_TEMPERATURE, 75.0);
-        mDatabase.insert(ForecastHelper.TABLE_TEMPERATURES, null, values);
+        mDatabase.beginTransaction();
+
+        try {
+            for (Forecast.HourData hour : forecast.hourly.data) {
+                ContentValues values = new ContentValues();
+                values.put(ForecastHelper.COLUMN_TEMPERATURE, hour.temperature);
+                mDatabase.insert(ForecastHelper.TABLE_TEMPERATURES, null, values);
+            }
+            mDatabase.setTransactionSuccessful();
+        }
+        finally {
+            mDatabase.endTransaction();
+        }
     }
 
     // select
+    public Cursor selectAllTemperatures() {
+        Cursor cursor = mDatabase.query(
+                ForecastHelper.TABLE_TEMPERATURES, // table
+                new String[] { ForecastHelper.COLUMN_TEMPERATURE }, // column names
+                null, // where clause
+                null, // where parameters
+                null, // groupby
+                null, // having
+                null  // orderby
+        );
 
+        return cursor;
+    }
 
+    public Cursor selectTempsGreaterThan(String minTemp) {
+        String whereClause = ForecastHelper.COLUMN_TEMPERATURE + " > ?";
+
+        Cursor cursor = mDatabase.query(
+                ForecastHelper.TABLE_TEMPERATURES, // table
+                new String[] { ForecastHelper.COLUMN_TEMPERATURE }, // column names
+                whereClause, // where clause
+                new String[] { minTemp }, // where parameters
+                null, // groupby
+                null, // having
+                null  // orderby
+        );
+
+        return cursor;
+    }
     // update
-
+    public int updateTemperature(double newTemp) {
+        ContentValues values = new ContentValues();
+        values.put(ForecastHelper.COLUMN_TEMPERATURE, newTemp);
+        int rowsUpdated = mDatabase.update(
+                ForecastHelper.TABLE_TEMPERATURES,
+                values,
+                null,
+                null
+        );
+        return rowsUpdated;
+    }
 
     // delete
+    public void deleteAll() {
+        mDatabase.delete(
+                ForecastHelper.TABLE_TEMPERATURES,
+                null,
+                null
+        );
 
+    }
 
 }

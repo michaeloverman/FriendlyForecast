@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
         mUpdateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Update
+                mDatasource.updateTemperature(100);
             }
         });
 
@@ -81,7 +81,7 @@ public class MainActivity extends Activity {
         mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Delete
+                mDatasource.deleteAll();
             }
         });
 
